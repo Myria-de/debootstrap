@@ -10,7 +10,7 @@ sudo apt install dosfstools qemu-utils
 ```
 installieren.
 
-Kopieren Sie das Script in einen Arbeitsordner und öffnen Sie es im Texteditor. Die folgenden Variablen unterhalb von „Configuration“ sollten Sie prüfen und bei Bedarf ändern:
+Laden Sie das Script-Paket über XXX herunter und entpackenb Sie es in einen Arbeitsordner, beispielsweise "~/debootstrap".  Öffnen Sie "build-ubuntu-noble-image.sh" im Texteditor. Die folgenden Variablen unterhalb von „Configuration“ sollten Sie prüfen und bei Bedarf ändern:
 
 **„DEFAULT_SUITE“:** Geben Sie die gewünschte Ubuntu-Version für debootstrap an. Belassen Sie „noble“, außer Sie wünschen ein älteres oder neueres System.
 
@@ -51,7 +51,7 @@ USE_APT_CACHER=
 sudo ./build-ubuntu-noble-image.sh
 ```
 
-**Linux Mint 22 installieren:** Linux Mint 22 basiert auf Ubuntu, verwendet zusätzlich aber eigene Pakete. Mit dem Script **"build-linux_mint-22-image.sh"** instalölieren Sie Linux Mint 22 in einem Image. Die Konfiguration entspricht der für Ubuntu.
+**Linux Mint 22 installieren:** Linux Mint 22 basiert auf Ubuntu, verwendet zusätzlich aber eigene Pakete. Mit dem Script **"build-linux_mint-22-image.sh"** installieren Sie Linux Mint 22 in einem Image. Die Konfiguration entspricht der für Ubuntu.
 
 **Problembehebung:** Sollte ein Script wegen eines Fehlers vorzeitig abbrechen, bleibt die virtuelle Festplatte eingehängt. Wenn das passiert, starten Sie
 ```
@@ -63,6 +63,15 @@ Löschen Sie die Image-Datei im Order "VMs". Beheben Sie den Fehler und starten 
 Die Scripts "create-vm-ubuntu-noble.sh" und "create_vm_linux_mint.sh" erstellen eine VM für KVM/Qemu. Die Scripts "create-vbox-ubuntu-noble.sh" und "create_vbox_vm_linux_mint.sh" konvertieren die Image-Datei für Virtualbox und erstellen eine VM.
 
 Passen Sie die Bezeichnungen in allen Scripts an. 
+
+## System aus dem Image auf eine physische Festplatte kopieren
+Verwenden Sie dafür das Script "virt_to_disk.sh".
+Aber Vorsicht! Es setzt voraus, dass eine zweite Festplatte für die Installation vorhanden ist. Die kann für einen anderen PC auch über einen SATA-USB-Adapter verbunden sein. Die Festplatte wird neu partitioniert und alles Daten darauf gehen verloren.
+Tragen Sie dafür beispielsweise
+```
+TARGET_DRIVE=/dev/sdb
+```
+im Script ein und passen Sie auch "TARGET_EFI_PART=" und "TARGET_ROOT_PART=" an. **Prüfen Sie dieses Angaben genau**, damit Sie nicht versehentlich das falsche Laufwerk formatieren.
 
 ## Befehlszeilen aus der LinuxWelt 2025-03 
 
