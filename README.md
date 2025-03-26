@@ -26,11 +26,43 @@ Kopieren Sie das Script in einen Arbeitsordner und öffnen Sie es im Texteditor.
 
 **„Browser“:** Ubuntu installiert Firefox und Chromium als Snap-App. In der chroot-Umgebung ist das nicht möglich, kann aber später im laufenden System nachgeholt werden. Unser Script bietet als Alternative die deb-Pakete der Browser an. Tragen Sie bei dieser Variable „firefox“ oder „chromium“ ein.
 
-Ist alles konfiguriert, starten Sie das Script im Arbeitsverzeichnis mit
+**"USE_APT_CACHER"**: Wer mehrere Linux-PCs (Ubuntu, Linux Mint, Debian) verwendet kann den Download von Paketen bei der Installation und bei Updates mit einem Cache beschleunigen. Das ist auch bei häufigen automatischen Installationen nützlich. Die Installation des Cache erfolgt auf einem ständig verfügbaren Server-PC mit
+```
+sudo apt install apt-cacher-ng
+```
+Für weitere Infos siehe [Schnellere Updates für Linux-PCs auf gleicher Basis](https://www.pcwelt.de/1150247)
+
+Auf den Clients benötigt man die Datei „02proxy“ mit einem Inhalt wie
+```
+Acquire::http { Proxy "http://192.168.178.111:3142"; };
+Acquire::https { Proxy "https//"; };
+```
+Ersetzen Sie die IP-Nummer durch die Ihres Server-PCs. Die Datei liegt im Arbeitsverzeichnis und wird in das Image kopiert, wenn Sie 
+```
+USE_APT_CACHER="yes"
+```
+konfiguren. Wenn Sie keinen Cache verwenden lautet die Konfiguration
+```
+USE_APT_CACHER=
+```
+
+**Script starten:** Ist alles konfiguriert, starten Sie das Script im Arbeitsverzeichnis mit
 ```
 sudo ./build-ubuntu-noble-image.sh
 ```
+
 **Linux Mint 22 installieren:** Linux Mint 22 basiert auf Ubuntu, verwendet zusätzlich aber eigene Pakete. Mit dem Script **"build-linux_mint-22-image.sh"** instalölieren Sie Linux Mint 22 in einem Image. Die Konfiguration entspricht der für Ubuntu.
+
+**Problembehebung:** Sollte ein Script wegen eines Fehlers vorzeitig abbrechen, bleibt die virtuelle Festplatte eingehängt. Wenn das passiert, starten Sie
+```
+sudo ./build-ubuntu-noble-image.sh -U
+```
+Löschen Sie die Image-Datei im Order "VMs". Beheben Sie den Fehler und starten Sie das Script erneut.
+
+## Virtuelle Maschine erstellen
+Die Scripts "create-vm-ubuntu-noble.sh" und "create_vm_linux_mint.sh" erstellen eine VM für KVM/Qemu. Die Scripts "create-vbox-ubuntu-noble.sh" und "create_vbox_vm_linux_mint.sh" konvertieren die Image-Datei für Virtualbox und erstellen eine VM.
+
+Passen Sie die Bezeichnungen in allen Scripts an. 
 
 ## Befehlszeilen aus der LinuxWelt 2025-03 
 
