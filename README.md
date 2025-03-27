@@ -12,7 +12,7 @@ sudo apt install dosfstools qemu-utils
 ```
 installieren.
 
-Laden Sie das Script-Paket über https://m6u.de/DEBSTDL herunter und entpacken Sie es in einen Arbeitsordner, beispielsweise "~/debootstrap" (oder clonen Sie dieses Repository). Öffnen Sie "build-ubuntu-noble-image.sh" im Texteditor. Die folgenden Variablen unterhalb von "Configuration" sollten Sie prüfen und bei Bedarf ändern:
+Laden Sie das Script-Paket über https://m6u.de/DEBSTDL herunter und entpacken Sie es in einen Arbeitsordner, beispielsweise "~/debootstrap" (oder klonen Sie dieses Repository). Öffnen Sie "build-ubuntu-noble-image.sh" im Texteditor. Die folgenden Variablen unterhalb von "Configuration" sollten Sie prüfen und bei Bedarf ändern:
 
 **"DEFAULT_SUITE":** Geben Sie die gewünschte Ubuntu-Version für debootstrap an. Belassen Sie "noble", außer Sie wünschen ein älteres oder neueres System.
 
